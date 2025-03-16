@@ -28,7 +28,7 @@ Follow these steps to clone and run **AlgoMate Terminal** locally:
 
 ### 🔹 Clone the Repository
 ```sh
-git clone https://github.com/Zlmaoooo/AlgoMate.git
+git clone https://github.com/Zlmaoooo/AlgoMate_Terminal.git
 ```
 
 ### 🔹 Navigate to the Project Directory
