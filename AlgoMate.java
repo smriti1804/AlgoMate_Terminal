@@ -20,8 +20,8 @@ public class AlgoMate {
             System.out.println("*  4. Exit                             *");
             System.out.println("*                                      *");
             System.out.println("****************************************");
+            
             System.out.print("Select an option: ");
-
             int choice = scanner.nextInt();
 
             if (choice == 1) {
@@ -52,8 +52,8 @@ public class AlgoMate {
             System.out.println("*  4. Division (/)                    *");
             System.out.println("*  5. Exit to Main Menu               *");
             System.out.println("****************************************");
+            
             System.out.print("Select an operation: ");
-
             int operation = scanner.nextInt();
             if (operation == 5) {
                 break;
@@ -97,8 +97,8 @@ public class AlgoMate {
             System.out.println("*  2. Inverse Trigonometry            *");
             System.out.println("*  3. Exponential (x^y)               *");
             System.out.println("*  4. Square Root                     *");
-            System.out.println("*  5. Logarithm                        *");
-            System.out.println("*  6. Factorial                        *");
+            System.out.println("*  5. Logarithm                       *");
+            System.out.println("*  6. Factorial                       *");
             System.out.println("*  7. Exit to Main Menu               *");
             System.out.println("****************************************");
             System.out.print("Select an operation: ");
@@ -107,35 +107,112 @@ public class AlgoMate {
             if (operation == 7) {
                 break;
             }
-
-            System.out.print("Enter a number: ");
-            double num = scanner.nextDouble();
-            double result = 0;
-            String historyEntry = "";
-
-            switch (operation) {
-                case 1: result = Math.sin(num); historyEntry = "sin(" + num + ") = " + result; break;
-                case 2: result = Math.asin(num); historyEntry = "asin(" + num + ") = " + result; break;
-                case 3: 
-                    System.out.print("Enter exponent: ");
-                    double exponent = scanner.nextDouble();
-                    result = Math.pow(num, exponent);
-                    historyEntry = num + "^" + exponent + " = " + result;
-                    break;
-                case 4: result = Math.sqrt(num); historyEntry = "sqrt(" + num + ") = " + result; break;
-                case 5: result = Math.log(num); historyEntry = "log(" + num + ") = " + result; break;
-                case 6: 
-                    result = 1;
-                    for (int i = 1; i <= num; i++) {
-                        result *= i;
-                    }
-                    historyEntry = "factorial(" + num + ") = " + result;
-                    break;
-                default: System.out.println("Invalid operation. Try again."); continue;
+            
+            // Operation for trigonometric functions
+            if (operation == 1 || operation == 2) {
+                System.out.println("Select a function:");
+                System.out.println("1. sin");
+                System.out.println("2. cos");
+                System.out.println("3. tan");
+                if (operation == 2) {
+                    System.out.println("4. asin");
+                    System.out.println("5. acos");
+                    System.out.println("6. atan");
+                }
+                System.out.print("Select an option: ");
+                int trigChoice = scanner.nextInt();
+                System.out.print("Enter a number: ");
+                double num = scanner.nextDouble();
+                double result = 0;
+                String historyEntry = "";
+                
+                switch (trigChoice) {
+                    case 1: result = Math.sin(num); historyEntry = "sin(" + num + ") = " + result; break;
+                    case 2: result = Math.cos(num); historyEntry = "cos(" + num + ") = " + result; break;
+                    case 3: result = Math.tan(num); historyEntry = "tan(" + num + ") = " + result; break;
+                    case 4: result = Math.asin(num); historyEntry = "asin(" + num + ") = " + result; break;
+                    case 5: result = Math.acos(num); historyEntry = "acos(" + num + ") = " + result; break;
+                    case 6: result = Math.atan(num); historyEntry = "atan(" + num + ") = " + result; break;
+                    default: 
+                        System.out.println("Invalid choice. Try again.");
+                        continue;
+                }
+                history.add(historyEntry);
+                System.out.println("Result: " + result);
+                continue;
             }
-            history.add(historyEntry);
-            System.out.println("Result: " + result);
+            
+            // Operation for exponential (x^y)
+            else if (operation == 3) {
+                System.out.print("Enter the base number: ");
+                double base = scanner.nextDouble();
+                System.out.print("Enter the exponent: ");
+                double exponent = scanner.nextDouble();
+                double result = Math.pow(base, exponent);
+                String historyEntry = base + " ^ " + exponent + " = " + result;
+                history.add(historyEntry);
+                System.out.println("Result: " + result);
+                continue;
+            }
+            
+            // Operation for Square Root
+            else if (operation == 4) {
+                System.out.print("Enter the number to find the square root: ");
+                double num = scanner.nextDouble();
+                // Check if the number is negative.
+                if (num < 0) {
+                    System.out.println("Cannot compute square root of a negative number.");
+                    continue;
+                }
+                double result = Math.sqrt(num);
+                String historyEntry = "√" + num + " = " + result;
+                history.add(historyEntry);
+                System.out.println("Result: " + result);
+                continue;
+            }
+            
+            // Operation for Logarithm (natural log)
+            else if (operation == 5) {
+                System.out.print("Enter the number for logarithm (natural log): ");
+                double num = scanner.nextDouble();
+                // Log requires the number to be positive.
+                if (num <= 0) {
+                    System.out.println("Logarithm is undefined for zero or negative numbers.");
+                    continue;
+                }
+                double result = Math.log(num);
+                String historyEntry = "ln(" + num + ") = " + result;
+                history.add(historyEntry);
+                System.out.println("Result: " + result);
+                continue;
+            }
+            
+            // Operation for Factorial
+            else if (operation == 6) {
+                System.out.print("Enter a non-negative integer for factorial: ");
+                int num = scanner.nextInt();
+                if (num < 0) {
+                    System.out.println("Factorial is undefined for negative numbers.");
+                    continue;
+                }
+                long result = factorial(num);
+                String historyEntry = num + "! = " + result;
+                history.add(historyEntry);
+                System.out.println("Result: " + result);
+                continue;
+            }
+            else {
+                System.out.println("Invalid operation. Try again.");
+            }
         }
+    }
+
+    // Helper method to calculate factorial recursively.
+    private static long factorial(int n) {
+        if (n == 0 || n == 1)
+            return 1;
+        else
+            return n * factorial(n - 1);
     }
 
     public static void viewHistory() {
