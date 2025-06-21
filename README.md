@@ -64,5 +64,5 @@ This project is **open-source** and free to use. Feel free to modify and improve
 ## 👨‍💻 Authors
 
 - **Team AlgoMate** (Your 10-member team) ✨
-- Special thanks to everyone who contributed! 🙌
+- Special thanks to everyone who contributed! 🙌👏🏻
 
